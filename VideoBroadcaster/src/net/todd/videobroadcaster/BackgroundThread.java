@@ -17,7 +17,7 @@ public class BackgroundThread extends Thread {
 			
 			Looper.loop();
 		} catch (Exception e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 	}
 	

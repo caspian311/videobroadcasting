@@ -25,14 +25,20 @@ public class Server {
 			
 			InputStream in = socket.getInputStream();
 			
-			File outputFile = File.createTempFile("video", ".vid");
+			File outputFile = File.createTempFile("video", ".mp4");
 			System.out.println("Writing to: " + outputFile.getAbsolutePath());
 			FileOutputStream fos = new FileOutputStream(outputFile);
 			
 			byte[] buffer = new byte[1024];
-			while (in.read(buffer) != 0) {
+			int readSize = 0;
+			int totalFileSize = 0;
+			do {
+				readSize = in.read(buffer);
 				fos.write(buffer);
+				totalFileSize += readSize;
+				System.out.println("bytes read " + totalFileSize);
 			}
+			while (readSize > 0);
 			fos.close();
 			socket.close();
 			System.out.println("Finished writing file");

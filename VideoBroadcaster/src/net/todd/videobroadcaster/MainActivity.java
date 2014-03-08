@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 import android.app.Activity;
+import android.hardware.Camera;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
@@ -75,8 +76,11 @@ public class MainActivity extends Activity {
 		MediaRecorder recorder = null;
 		try {
 			recorder = new MediaRecorder();
+			Camera camera = Camera.open();
+			camera.unlock();
+			recorder.setCamera(camera);
 			recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-			recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+			recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
 			recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 			recorder.setOutputFile(pfd.getFileDescriptor());
 
