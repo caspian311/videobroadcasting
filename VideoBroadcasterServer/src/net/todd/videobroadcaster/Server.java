@@ -3,6 +3,7 @@ package net.todd.videobroadcaster;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -32,16 +33,13 @@ public class Server {
 			byte[] buffer = new byte[1024];
 			int readSize = 0;
 			int totalFileSize = 0;
-			do {
-				readSize = in.read(buffer);
+			while((readSize = in.read(buffer)) > 0) {
 				fos.write(buffer);
 				totalFileSize += readSize;
-				System.out.println("bytes read " + totalFileSize);
 			}
-			while (readSize > 0);
 			fos.close();
 			socket.close();
-			System.out.println("Finished writing file");
+			System.out.println("Finished writing " + totalFileSize + " to file");
 		}
 	}
 }
