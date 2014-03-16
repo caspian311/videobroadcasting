@@ -61,7 +61,7 @@ public class Server {
 	}
 
 	private File createOutputFile() throws IOException {
-		File outputFile = File.createTempFile("video", ".mp4");
+		File outputFile = File.createTempFile("video_recording", ".mp4");
 		System.out.println("Writing to: " + outputFile.getAbsolutePath());
 		return outputFile;
 	}
